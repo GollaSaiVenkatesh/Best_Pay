@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         val actionBar=supportActionBar
         actionBar!!.hide()
-        //sample
+        
 
 
 
