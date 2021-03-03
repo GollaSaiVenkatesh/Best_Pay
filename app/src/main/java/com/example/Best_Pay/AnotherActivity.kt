@@ -9,7 +9,13 @@ class AnotherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_another)
         val actionBar= supportActionBar
-        actionBar!!.title="Another Activity"
+        actionBar!!.title="Home Pay"
+
+        val searchEvent=findViewById<SearchView>(R.id.search_bar)
+
+
+
+
 
 
 

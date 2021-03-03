@@ -13,15 +13,29 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="Search for the product your looking for."
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:textSize="22dp"
+        android:textSize="12dp"
         android:textColor="@color/black"
         />
-    <SearchView
-        android:layout_width="wrap_content"
+    <SearchView android:id="@+id/search_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Search for the product your looking for..."
+
+        android:background="@drawable/custom_background"
         />
+    <ListView android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+
+        />
+
+
 
 </LinearLayout>
