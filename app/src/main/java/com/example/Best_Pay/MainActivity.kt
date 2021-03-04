@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         imageView2.animation=bottomAnimation
         Handler(Looper.getMainLooper()).postDelayed({
             // Your Code
-            val intent= Intent(this,AnotherActivity::class.java)
+            val intent= Intent(this,HomePage::class.java)
             startActivity(intent)
             finish()
 

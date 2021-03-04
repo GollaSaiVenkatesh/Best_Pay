@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:queryHint="Search Here"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/custom_background"
+        />
+    <TextView
+        android:id="@+id/brands"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/Brands"
+        />
+
+    <ImageView
+        android:id="@+id/samsung_logo"
+        android:layout_width="80dp"
+        android:layout_height="130dp"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/logo_samsung"
+        />
+    <ImageView
+        android:id="@+id/oppo_logo"
+        android:layout_width="80dp"
+        android:layout_height="130dp"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        app:layout_constraintStart_toEndOf="@id/samsung_logo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/logo_oppo"
+        />
+
+    <ImageView
+        android:id="@+id/mi_logo"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="104dp"
+        android:src="@drawable/logo_mi"
+        app:layout_constraintStart_toEndOf="@id/oppo_logo"
+        app:layout_constraintTop_toTopOf="@id/search_bar" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
