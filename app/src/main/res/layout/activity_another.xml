@@ -9,23 +9,12 @@
     android:gravity="center"
     tools:context=".AnotherActivity">
 
-    <TextView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Search for the product your looking for."
-        android:fontFamily="sans-serif-thin"
-        android:gravity="center"
-        android:textSize="12dp"
-        android:textColor="@color/black"
-        />
     <SearchView android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Search for the product your looking for..."
-
+        android:queryHint="Search Here"
+        android:iconifiedByDefault="false"
         android:background="@drawable/custom_background"
         />
     <ListView android:id="@+id/list_item"

@@ -11,7 +11,7 @@ class AnotherActivity : AppCompatActivity() {
         val actionBar= supportActionBar
         actionBar!!.title="Home Pay"
 
-        val searchEvent=findViewById<SearchView>(R.id.search_bar)
+
 
 
 
