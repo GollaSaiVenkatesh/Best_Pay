@@ -1,26 +1,25 @@
 package com.example.Best_Pay
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.SearchView
-import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import android.widget.ImageButton
+
 
 class HomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-
-
-
-        fun main() {
-            csvReader().open("data/amazon.csv") {
-                readAllAsSequence().forEach { row ->
-                    //Do something
-                    println(row) //[a, b, c]
-                }
-            }
+        val mi_button=findViewById<ImageButton>(R.id.mi_logo)
+        mi_button.setOnClickListener {
+            val intent= Intent(this,AnotherActivity::class.java)
+            startActivity(intent)
+            finish()
         }
+
+
+
+
 
 
 
