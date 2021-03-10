@@ -29,9 +29,13 @@ class AnotherActivity : AppCompatActivity() {
     var adapter: Adapter? = null
     var progressBar: ProgressBar? = null
     var wait: TextView? = null
+    companion object {
+        const val BRAND = "brand"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_another)
+        val company_name = intent?.extras?.getString(BRAND).toString()
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBar)
         wait = findViewById(R.id.wait)
@@ -66,11 +70,13 @@ class AnotherActivity : AppCompatActivity() {
                         if (sheet != null) {
                             for (i in 1 until sheet.rows) {
                                 val row = sheet.getRow(i)
-                                productTitle?.add(row[0].contents)
-                                ratings?.add(row[1].contents)
-                                reviewCount?.add(row[2].contents)
-                                productImg?.add(row[3].contents)
-                                productPrice?.add(row.last().contents)
+                                if(company_name in row[0].contents.toLowerCase()) {
+                                    productTitle?.add(row[0].contents)
+                                    ratings?.add(row[1].contents)
+                                    reviewCount?.add(row[2].contents)
+                                    productImg?.add(row[3].contents)
+                                    productPrice?.add(row.last().contents)
+                                }
                             }
                         }
                         showData()
