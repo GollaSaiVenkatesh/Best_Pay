@@ -17,14 +17,16 @@ class Adapter internal constructor(
     ratings: List<String>,
     review_counts: List<String>,
     product_imgs: List<String>,
-    product_prices: List<String>
+    amazon_prices: List<String>,
+    flipkart_prices: List<String>
 ) :
     RecyclerView.Adapter<Adapter.ViewHolder>() {
     private val product_titles: List<String>
     private val ratings: List<String>
     private val review_counts: List<String>
     private val product_imgs: List<String>
-    private val product_prices: List<String>
+    private val amazon_prices: List<String>
+    private val flipkart_prices: List<String>
     private val inflater: LayoutInflater
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = inflater.inflate(R.layout.custom_layout, parent, false)
@@ -35,13 +37,15 @@ class Adapter internal constructor(
         val title = product_titles[position]
         val rating = ratings[position]
         val review_count = review_counts[position]
-        val product_img = product_imgs[position]
-        val product_price = product_prices[position]
+        val amazon_price = amazon_prices[position]
+        val flipkart_price = flipkart_prices[position]
         Picasso.get().load(product_imgs[position]).into(holder.thumbnail)
+
         holder.productTitle.text = title
         holder.rating.text = rating
         holder.reviewCount.text = review_count
-        holder.productPrice.text = product_price
+        holder.amazonPrice.text = amazon_price
+        holder.flipkartPrice.text = flipkart_price
     }
 
     override fun getItemCount(): Int {
@@ -54,13 +58,15 @@ class Adapter internal constructor(
         var rating: TextView
         var reviewCount: TextView
         var thumbnail: ImageView
-        var productPrice: TextView
+        var amazonPrice: TextView
+        var flipkartPrice: TextView
 
         init {
             productTitle = itemView.findViewById(R.id.product_title)
             rating = itemView.findViewById(R.id.ratings)
             reviewCount = itemView.findViewById(R.id.review_count)
-            productPrice =itemView.findViewById(R.id.product_price)
+            amazonPrice = itemView.findViewById(R.id.amazon_price)
+            flipkartPrice = itemView.findViewById(R.id.flipkart_price)
             thumbnail = itemView.findViewById(R.id.product_Img)
         }
     }
@@ -71,7 +77,8 @@ class Adapter internal constructor(
         this.ratings = ratings
         this.review_counts = review_counts
         this.product_imgs = product_imgs
-        this.product_prices = product_prices
+        this.amazon_prices = amazon_prices
+        this.flipkart_prices = flipkart_prices
         inflater = LayoutInflater.from(context)
     }
 }

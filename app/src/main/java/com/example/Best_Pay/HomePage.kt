@@ -1,9 +1,9 @@
 package com.example.Best_Pay
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 
 
 class HomePage : AppCompatActivity() {
@@ -14,17 +14,17 @@ class HomePage : AppCompatActivity() {
         val oppo_button = findViewById<ImageButton>(R.id.oppo_logo)
         val samsung_button = findViewById<ImageButton>(R.id.samsung_logo)
         mi_button.setOnClickListener {
-            val intent= Intent(this,AnotherActivity::class.java)
+            val intent= Intent(this, AnotherActivity::class.java)
             intent.putExtra(AnotherActivity.BRAND, "redmi")
             startActivity(intent)
         }
         oppo_button.setOnClickListener {
-            val intent= Intent(this,AnotherActivity::class.java)
+            val intent= Intent(this, AnotherActivity::class.java)
             intent.putExtra(AnotherActivity.BRAND, "oppo")
             startActivity(intent)
         }
         samsung_button.setOnClickListener {
-            val intent= Intent(this,AnotherActivity::class.java)
+            val intent= Intent(this, AnotherActivity::class.java)
             intent.putExtra(AnotherActivity.BRAND, "samsung")
             startActivity(intent)
         }
