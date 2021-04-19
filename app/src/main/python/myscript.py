@@ -4,6 +4,8 @@ import base64
 from PIL import Image
 import numpy as np
 import io
+import csv
+from os.path import dirname, join
 
 def main(a,b):
     fig = plt.figure()
