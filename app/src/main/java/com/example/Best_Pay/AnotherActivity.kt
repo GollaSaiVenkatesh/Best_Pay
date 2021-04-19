@@ -2,6 +2,8 @@ package com.example.Best_Pay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.appcompat.widget.SearchView
 
 class AnotherActivity : AppCompatActivity() {
@@ -12,6 +14,9 @@ class AnotherActivity : AppCompatActivity() {
         actionBar!!.title="Home Pay"
 
         val searchEvent=findViewById<SearchView>(R.id.search_bar)
+        val listView= findViewById<ListView>(R.id.list_item)
+        val names= arrayOf("Android","Java","php","Python","c")
+       
 
 
 
