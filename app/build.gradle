@@ -27,6 +27,12 @@ android {
         }
         python {
             buildPython "C:/Users/golla/AppData/Local/Programs/Python/Python39/python.exe"
+            pip{
+                install "opencv-contrib-python-headless"
+                install "pillow"
+                install "numpy"
+                install "matplotlib"
+            }
         }
     }
 

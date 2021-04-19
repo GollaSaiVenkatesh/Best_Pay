@@ -1,12 +1,14 @@
 package com.example.Best_Pay
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -46,6 +48,14 @@ class Adapter internal constructor(
         holder.reviewCount.text = review_count
         holder.amazonPrice.text = amazon_price
         holder.flipkartPrice.text = flipkart_price
+        holder.productTitle.setOnClickListener{
+            val context = holder.productTitle.context
+            val intent = Intent(context, ProductActivity::class.java)
+            intent.putExtra(ProductActivity.title, title)
+            context.startActivity(intent)
+
+        }
+
     }
 
     override fun getItemCount(): Int {

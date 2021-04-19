@@ -1,5 +1,7 @@
 package com.example.Best_Pay
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.loopj.android.http.AsyncHttpClient
@@ -38,6 +41,7 @@ class AnotherActivity : AppCompatActivity() {
     companion object {
         const val BRAND = "brand"
     }
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_another)
@@ -155,6 +159,7 @@ class AnotherActivity : AppCompatActivity() {
                 }
             }
         }]
+
 
 
     }
