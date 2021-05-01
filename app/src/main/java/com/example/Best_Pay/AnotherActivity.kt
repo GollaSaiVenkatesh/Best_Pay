@@ -31,6 +31,8 @@ class AnotherActivity : AppCompatActivity() {
     var productPrice: MutableList<String>? = null
     lateinit var amazonPrice: MutableList<String>
     lateinit var flipkartPrice: MutableList<String>
+    lateinit var amazonUrl: MutableList<String>
+    lateinit var flipkartUrl: MutableList<String>
     var productImg: MutableList<String>? = null
     var recyclerView: RecyclerView? = null
     var adapter: Adapter? = null
@@ -38,6 +40,8 @@ class AnotherActivity : AppCompatActivity() {
     var wait: TextView? = null
     var flipkartProducts: MutableMap<String,String>? = null
     var amazonProducts: MutableMap<String,String>? = null
+    var flipkartProductUrls: MutableMap<String,String>? = null
+    var amazonProductUrls: MutableMap<String,String>? = null
     companion object {
         const val BRAND = "brand"
     }
@@ -60,19 +64,23 @@ class AnotherActivity : AppCompatActivity() {
         flipkartPrice = ArrayList()
         productImg = ArrayList()
         productPrice = ArrayList()
+        amazonUrl = ArrayList()
+        flipkartUrl = ArrayList()
         flipkartProducts = mutableMapOf()
         amazonProducts = mutableMapOf()
+        flipkartProductUrls = mutableMapOf()
+        amazonProductUrls = mutableMapOf()
         asyncHttpClient = AsyncHttpClient()
         asyncHttpClient!![URL1, object : FileAsyncHttpResponseHandler(this) {
             override fun onFailure(statusCode: Int, headers: Array<Header>, throwable: Throwable, file: File) {
 
                 val toast = Toast.makeText(this@AnotherActivity, "Error in Downloading Excel File", Toast.LENGTH_SHORT)
+                toast.show()
                 wait?.setVisibility(View.GONE)
                 progressBar?.setVisibility(View.GONE)
             }
 
             override fun onSuccess(statusCode: Int, headers: Array<Header>, file: File) {
-                Log.d("flipkart","1")
                 val ws = WorkbookSettings()
                 ws.gcDisabled = true
                 if (file != null) {
@@ -82,10 +90,10 @@ class AnotherActivity : AppCompatActivity() {
                         workbook = Workbook.getWorkbook(file)
                         val sheet = workbook?.getSheet(0)
                         if (sheet != null) {
-                            Log.d("flipkart","2")
+
                             for (i in 1 until sheet.rows) {
                                 val row = sheet.getRow(i)
-                                if(company_name in row[0].contents.toLowerCase()) {
+                                if(company_name.replace(" ","") in row[0].contents.toLowerCase().replace(" ","")) {
                                     if(row[0].contents.toLowerCase().replace(" ","") !in productName as ArrayList<String>) {
                                         productTitle?.add(row[0].contents)
                                         productName?.add(row[0].contents.toLowerCase().replace(" ", ""))
@@ -96,11 +104,14 @@ class AnotherActivity : AppCompatActivity() {
 
                                     }
                                     flipkartProducts!![row[0].contents.toLowerCase().replace(" ","")] = row.last().contents
+                                    flipkartProductUrls!![row[0].contents.toLowerCase().replace(" ","")] = row[4].contents
+
 
                                 }
                             }
+
                         }
-                        Log.d("flipkart","3")
+
                         showData()
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -115,6 +126,7 @@ class AnotherActivity : AppCompatActivity() {
             override fun onFailure(statusCode: Int, headers: Array<Header>, throwable: Throwable, file: File) {
 
                 val toast = Toast.makeText(this@AnotherActivity, "Error in Downloading Excel File", Toast.LENGTH_SHORT)
+                toast.show()
                 wait?.setVisibility(View.GONE)
                 progressBar?.setVisibility(View.GONE)
             }
@@ -130,7 +142,7 @@ class AnotherActivity : AppCompatActivity() {
                         workbook = Workbook.getWorkbook(file)
                         val sheet = workbook?.getSheet(0)
                         if (sheet != null) {
-                            Log.d("amazon","2")
+
                             for (i in 1 until sheet.rows) {
                                 val row = sheet.getRow(i)
                                 if(company_name in row[0].contents.toLowerCase()) {
@@ -144,11 +156,12 @@ class AnotherActivity : AppCompatActivity() {
 
                                     }
                                     amazonProducts!![row[0].contents.toLowerCase().replace(" ","")] = row.last().contents
+                                    amazonProductUrls!![row[0].contents.toLowerCase().replace(" ","")] = row[4].contents
 
                                 }
                             }
                         }
-                        Log.d("amazon","3")
+
 
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -164,30 +177,34 @@ class AnotherActivity : AppCompatActivity() {
 
     }
     private fun showData() {
-        for(i in productTitle!!){
-            if (amazonProducts?.contains(i.toLowerCase().replace(" ","")) == true){
-                amazonProducts!![i.toLowerCase().replace(" ","")]?.let { amazonPrice.add(it) }
-            }
-            else{
+        for(i in productTitle!!) {
+            if (amazonProducts?.contains(i.toLowerCase().replace(" ", "")) == true) {
+                amazonProducts!![i.toLowerCase().replace(" ", "")]?.let { amazonPrice.add(it) }
+                amazonProductUrls!![i.toLowerCase().replace(" ", "")]?.let { amazonUrl.add(it) }
+
+
+            } else {
+                amazonUrl.add("Not Found")
                 amazonPrice.add("Not Found")
             }
-            if (flipkartProducts?.contains(i.toLowerCase().replace(" ","")) == true){
-                flipkartProducts!![i.toLowerCase().replace(" ","")]?.let { flipkartPrice.add(it) }
-            }
-            else{
+            if (flipkartProducts?.contains(i.toLowerCase().replace(" ", "")) == true) {
+                flipkartProducts!![i.toLowerCase().replace(" ", "")]?.let { flipkartPrice.add(it) }
+                flipkartProductUrls!![i.toLowerCase().replace(" ", "")]?.let { flipkartUrl.add(it) }
+            } else {
+                flipkartUrl.add("Not Found")
                 flipkartPrice.add("Not Found")
             }
 
         }
-        Log.d("show","1")
-        Log.d("amazon products",amazonProducts.toString())
-        Log.d("flipkart products",flipkartProducts.toString())
-        Log.d("amazon price",amazonPrice.toString())
-        Log.d("flipkart price",flipkartPrice.toString())
-        Log.d("show","2")
+        if(amazonPrice.size== 0){
+            if(flipkartPrice.size== 0){
+                val toast = Toast.makeText(this@AnotherActivity, "No results found", Toast.LENGTH_SHORT)
+                toast.show()
+            }
 
+        }
         recyclerView!!.layoutManager = LinearLayoutManager(this)
-        adapter = productTitle?.let { ratings?.let { it1 -> reviewCount?.let { it2 -> productImg?.let { it3 -> amazonPrice?.let { it4 -> flipkartPrice?.let { it5 ->  Adapter(this, it, it1, it2, it3, it4,it5) } } } } } }
+        adapter = productTitle?.let { ratings?.let { it1 -> reviewCount?.let { it2 -> productImg?.let { it3 -> amazonPrice?.let { it4 -> flipkartPrice?.let { it5 -> amazonUrl?.let { it6 -> flipkartUrl?.let { it7 ->  Adapter(this, it, it1, it2, it3, it4,it5,it6,it7) } } } } } } } }
         recyclerView!!.adapter = adapter
 
     }
