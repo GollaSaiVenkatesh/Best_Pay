@@ -20,7 +20,7 @@
         android:id="@+id/price_graph"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:src="@drawable/ic_launcher_background"
         tools:ignore="VectorDrawableCompat"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -30,9 +30,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="100dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_graph"
         android:text="Least Price"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="50dp"
         />
     <TextView
         android:id="@+id/highest_price_label"
@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="95dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_graph"
         android:text="Highest Price"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="90dp"
         />
     <TextView
         android:id="@+id/least_price"
@@ -50,9 +50,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="220dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_graph"
         android:text="Least Price"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="50dp"
         />
     <TextView
         android:id="@+id/highest_price"
@@ -60,9 +60,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="220dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_graph"
         android:text="Highest Price"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="90dp"
         />
 
 

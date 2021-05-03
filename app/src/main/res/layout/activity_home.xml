@@ -17,27 +17,23 @@
 
         />
 
-
     <TextView
         android:id="@+id/brands"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
         android:layout_marginTop="44dp"
         android:text="Available brands"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
     <ImageButton
         android:id="@+id/samsung_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="80dp"
         android:scaleType="fitCenter"
-        android:layout_marginStart="20dp"
         android:src="@drawable/samsung_logo"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -47,25 +43,37 @@
         android:id="@+id/mi_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="80dp"
         android:scaleType="fitCenter"
         android:src="@drawable/mi_logo"
         app:layout_constraintStart_toEndOf="@id/samsung_logo"
+        app:layout_constraintEnd_toStartOf="@id/oppo_logo"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
     <ImageButton
         android:id="@+id/oppo_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="80dp"
         android:scaleType="fitCenter"
         android:src="@drawable/oppo_logo"
-        app:layout_constraintStart_toEndOf="@id/mi_logo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />
+
+    <ImageButton
+        android:id="@+id/lowest_ever"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@id/oppo_logo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/samsung_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bestdeal" />
 
 
 

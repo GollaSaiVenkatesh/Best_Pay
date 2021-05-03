@@ -14,7 +14,8 @@ class HomePage : AppCompatActivity() {
         val mi_button= findViewById<ImageButton>(R.id.mi_logo)
         val oppo_button = findViewById<ImageButton>(R.id.oppo_logo)
         val samsung_button = findViewById<ImageButton>(R.id.samsung_logo)
-        var search_bar=findViewById<SearchView>(R.id.search_bar)
+        var search_bar = findViewById<SearchView>(R.id.search_bar)
+        var lowest_ever = findViewById<ImageButton>(R.id.lowest_ever)
         search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 val intent = Intent(applicationContext,AnotherActivity::class.java )
@@ -39,6 +40,11 @@ class HomePage : AppCompatActivity() {
         samsung_button.setOnClickListener {
             val intent= Intent(this, AnotherActivity::class.java)
             intent.putExtra(AnotherActivity.BRAND, "samsung")
+            startActivity(intent)
+        }
+        lowest_ever.setOnClickListener{
+            val intent= Intent(this, AnotherActivity::class.java)
+            intent.putExtra(AnotherActivity.BRAND, "lowest ever")
             startActivity(intent)
         }
     }

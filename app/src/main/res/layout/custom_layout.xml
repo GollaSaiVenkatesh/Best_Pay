@@ -21,22 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp">
-            <TextView
-                android:id="@+id/lowest_or_not"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/product_title"
-                app:layout_constraintBottom_toTopOf="@id/product_Img"
-                tools:text ="Lowest ever"
-                />
+
 
             <ImageView
                 android:id="@+id/product_Img"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:importantForAccessibility="no"
@@ -61,91 +51,101 @@
                 app:layout_constraintStart_toEndOf="@+id/product_Img"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.chip.Chip
                 android:id="@+id/ratings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="110dp"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="8dp"
-
-                android:text="Ratings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_title"
-                app:layout_constraintVertical_bias="0.0" />
+                android:layout_width="59dp"
+                android:layout_height="41dp"
+                android:background="#4CAF50"
+                android:checkable="false"
+                android:drawablePadding="5dp"
+                android:text="4.2"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FFFFFF"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="#4CAF50"
+                app:chipIcon="@android:drawable/btn_star"
+                app:chipIconSize="20dp"
+                app:chipIconTint="#FFFFFF"
+                app:chipIconVisible="true"
+                app:chipStrokeColor="#000000"
+                app:chipStrokeWidth="0dp"
+                app:layout_constraintStart_toStartOf="@id/product_title"
+                app:layout_constraintTop_toBottomOf="@id/product_title"
+                app:textEndPadding="2dp" />
 
             <TextView
                 android:id="@+id/review_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="186dp"
-                android:layout_marginLeft="186dp"
-
-                android:layout_marginTop="8dp"
                 android:text="Review count"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_title"
-                app:layout_constraintVertical_bias="0.0" />
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@id/ratings"
+                app:layout_constraintTop_toTopOf="@id/ratings"
+                app:layout_constraintStart_toEndOf="@id/ratings"
+                 />
 
-            <TextView
-                android:id="@+id/amazon_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Amazon price"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/amazon_logo"
-                app:layout_constraintTop_toBottomOf="@id/ratings"
-                app:layout_constraintVertical_bias="0.4" />
-
-            <TextView
-                android:id="@+id/flipkart_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="Flipkart price"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/flipkart_logo"
-                app:layout_constraintTop_toBottomOf="@id/ratings"
-                app:layout_constraintVertical_bias="0.428" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lowest_or_not"
+                android:layout_width="125dp"
+                android:layout_height="41dp"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="20dp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="#35ABDB"
+                app:chipIcon="@drawable/rs"
+                app:chipIconSize="20dp"
+                app:chipIconVisible="true"
+                android:text="Lowest Ever"
+                app:layout_constraintStart_toEndOf="@id/review_count"
+                app:layout_constraintTop_toTopOf="@id/ratings"
+                app:layout_constraintBottom_toBottomOf="@id/ratings"/>
 
             <ImageView
                 android:id="@+id/amazon_logo"
                 android:layout_width="34dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="15dp"
                 android:adjustViewBounds="false"
                 android:background="#0FFFFFFF"
                 android:cropToPadding="true"
                 android:scaleType="centerInside"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/product_title"
                 app:layout_constraintTop_toBottomOf="@id/ratings"
                 app:srcCompat="@drawable/amazonlogo" />
+
+            <TextView
+                android:id="@+id/amazon_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="10999"
+                app:layout_constraintStart_toEndOf="@id/amazon_logo"
+                app:layout_constraintTop_toTopOf="@id/amazon_logo"
+                app:layout_constraintBottom_toBottomOf="@id/amazon_logo"
+                 />
 
             <ImageView
                 android:id="@+id/flipkart_logo"
                 android:layout_width="53dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="250dp"
-                android:layout_marginLeft="250dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ratings"
-                app:srcCompat="@drawable/flipkartlogo" />
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/flipkartlogo"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toTopOf="@id/amazon_logo"
+                app:layout_constraintBottom_toBottomOf="@id/amazon_logo"
+                app:layout_constraintStart_toEndOf="@id/amazon_price"
+            />
+
+            <TextView
+                android:id="@+id/flipkart_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="14999"
+                app:layout_constraintStart_toEndOf="@id/flipkart_logo"
+                app:layout_constraintTop_toTopOf="@id/flipkart_logo"
+                app:layout_constraintBottom_toBottomOf="@id/flipkart_logo"
+                 />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

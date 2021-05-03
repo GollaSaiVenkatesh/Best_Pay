@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chaquo.python.PyObject
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.FileAsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
@@ -53,8 +56,8 @@ class AnotherActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBar)
         wait = findViewById(R.id.wait)
-        val URL1 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/flipkart.xls?raw=true"
-        val URL2 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/amazon.xls?raw=true"
+        val URL1 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/flipkart1.xls?raw=true"
+        val URL2 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/amazon1.xls?raw=true"
         productTitle = ArrayList()
         productName = ArrayList()
         ratings = ArrayList()
@@ -93,20 +96,46 @@ class AnotherActivity : AppCompatActivity() {
 
                             for (i in 1 until sheet.rows) {
                                 val row = sheet.getRow(i)
-                                if(company_name.replace(" ","") in row[0].contents.toLowerCase().replace(" ","")) {
-                                    if(row[0].contents.toLowerCase().replace(" ","") !in productName as ArrayList<String>) {
-                                        productTitle?.add(row[0].contents)
-                                        productName?.add(row[0].contents.toLowerCase().replace(" ", ""))
-                                        ratings?.add(row[1].contents)
-                                        reviewCount?.add(row[2].contents)
-                                        productImg?.add(row[3].contents)
-                                        productPrice?.add(row.last().contents)
+                                if(company_name=="lowest ever"){
+                                    if(!Python.isStarted())
+                                        Python.start( AndroidPlatform(this@AnotherActivity))
+                                    var py4 : Python = Python.getInstance()
+                                    var pyo4 : PyObject = py4.getModule("least_price")
+                                    var obj4 : PyObject = pyo4.callAttr("main",row[0].contents)
+                                    var least:Float = obj4.toFloat()
+                                    if(row.last().contents !="unavailable" && row.last().contents != "Not Found") {
+                                        if (row.last().contents.replace(",","").toFloat() <= least) {
+                                            if (row[0].contents.toLowerCase().replace(" ", "") !in productName as ArrayList<String>) {
+                                                productTitle?.add(row[0].contents)
+                                                productName?.add(row[0].contents.toLowerCase().replace(" ", ""))
+                                                ratings?.add(row[1].contents)
+                                                reviewCount?.add(row[2].contents)
+                                                productImg?.add(row[3].contents)
+                                                productPrice?.add(row.last().contents)
+
+                                            }
+                                            flipkartProducts!![row[0].contents.toLowerCase().replace(" ", "")] = row.last().contents
+                                            flipkartProductUrls!![row[0].contents.toLowerCase().replace(" ", "")] = row[4].contents
+                                        }
+                                    }
+
+                                }
+                                else {
+                                    if (company_name.toLowerCase().replace(" ", "") in row[0].contents.toLowerCase().replace(" ", "")) {
+                                        if (row[0].contents.toLowerCase().replace(" ", "") !in productName as ArrayList<String>) {
+                                            productTitle?.add(row[0].contents)
+                                            productName?.add(row[0].contents.toLowerCase().replace(" ", ""))
+                                            ratings?.add(row[1].contents)
+                                            reviewCount?.add(row[2].contents)
+                                            productImg?.add(row[3].contents)
+                                            productPrice?.add(row.last().contents)
+
+                                        }
+                                        flipkartProducts!![row[0].contents.toLowerCase().replace(" ", "")] = row.last().contents
+                                        flipkartProductUrls!![row[0].contents.toLowerCase().replace(" ", "")] = row[4].contents
+
 
                                     }
-                                    flipkartProducts!![row[0].contents.toLowerCase().replace(" ","")] = row.last().contents
-                                    flipkartProductUrls!![row[0].contents.toLowerCase().replace(" ","")] = row[4].contents
-
-
                                 }
                             }
 
@@ -145,19 +174,48 @@ class AnotherActivity : AppCompatActivity() {
 
                             for (i in 1 until sheet.rows) {
                                 val row = sheet.getRow(i)
-                                if(company_name in row[0].contents.toLowerCase()) {
-                                    if(row[0].contents.toLowerCase().replace(" ","") !in productName as ArrayList<String>) {
-                                        productTitle?.add(row[0].contents)
-                                        productName?.add(row[0].contents.toLowerCase().replace(" ",""))
-                                        ratings?.add(row[1].contents)
-                                        reviewCount?.add(row[2].contents)
-                                        productImg?.add(row[3].contents)
-                                        productPrice?.add(row.last().contents)
+                                if(company_name=="lowest ever"){
+                                    if(!Python.isStarted())
+                                        Python.start( AndroidPlatform(this@AnotherActivity))
+                                    var py4 : Python = Python.getInstance()
+                                    var pyo4 : PyObject = py4.getModule("least_price")
+                                    var obj4 : PyObject = pyo4.callAttr("main",row[0].contents)
+                                    var least:Float = obj4.toFloat()
+                                    if(row.last().contents !="unavailable" && row.last().contents != "Not Found"){
+                                        if(row.last().contents.replace(",","").toFloat() <= least) {
+                                            if (row[0].contents.toLowerCase().replace(" ", "") !in productName as ArrayList<String>) {
+                                                productTitle?.add(row[0].contents)
+                                                productName?.add(row[0].contents.toLowerCase().replace(" ", ""))
+                                                ratings?.add(row[1].contents)
+                                                reviewCount?.add(row[2].contents)
+                                                productImg?.add(row[3].contents)
+                                                productPrice?.add(row.last().contents)
+
+                                            }
+                                            amazonProducts!![row[0].contents.toLowerCase().replace(" ", "")] = row.last().contents
+                                            amazonProductUrls!![row[0].contents.toLowerCase().replace(" ", "")] = row[4].contents
+
+                                        }
 
                                     }
-                                    amazonProducts!![row[0].contents.toLowerCase().replace(" ","")] = row.last().contents
-                                    amazonProductUrls!![row[0].contents.toLowerCase().replace(" ","")] = row[4].contents
 
+
+                                }
+                                else {
+                                    if (company_name in row[0].contents.toLowerCase()) {
+                                        if (row[0].contents.toLowerCase().replace(" ", "") !in productName as ArrayList<String>) {
+                                            productTitle?.add(row[0].contents)
+                                            productName?.add(row[0].contents.toLowerCase().replace(" ", ""))
+                                            ratings?.add(row[1].contents)
+                                            reviewCount?.add(row[2].contents)
+                                            productImg?.add(row[3].contents)
+                                            productPrice?.add(row.last().contents)
+
+                                        }
+                                        amazonProducts!![row[0].contents.toLowerCase().replace(" ", "")] = row.last().contents
+                                        amazonProductUrls!![row[0].contents.toLowerCase().replace(" ", "")] = row[4].contents
+
+                                    }
                                 }
                             }
                         }
@@ -204,7 +262,7 @@ class AnotherActivity : AppCompatActivity() {
 
         }
         recyclerView!!.layoutManager = LinearLayoutManager(this)
-        adapter = productTitle?.let { ratings?.let { it1 -> reviewCount?.let { it2 -> productImg?.let { it3 -> amazonPrice?.let { it4 -> flipkartPrice?.let { it5 -> amazonUrl?.let { it6 -> flipkartUrl?.let { it7 ->  Adapter(this, it, it1, it2, it3, it4,it5,it6,it7) } } } } } } } }
+        adapter = productTitle?.let { ratings?.let { it1 -> reviewCount?.let { it2 -> productImg?.let { it3 -> amazonPrice?.let { it4 -> flipkartPrice?.let { it5 -> amazonUrl?.let { it6 -> flipkartUrl?.let { it7 -> intent?.extras?.getString(BRAND).toString()?.let { it8 ->  Adapter(this, it, it1, it2, it3, it4,it5,it6,it7,it8) } } } } } } } } }
         recyclerView!!.adapter = adapter
 
     }

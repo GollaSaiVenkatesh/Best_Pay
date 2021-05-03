@@ -27,7 +27,8 @@ class Adapter internal constructor(
     amazon_prices: List<String>,
     flipkart_prices: List<String>,
     amazon_urls: List<String>,
-    flipkart_urls: List<String>
+    flipkart_urls: List<String>,
+    Brand: String
 ) :
     RecyclerView.Adapter<Adapter.ViewHolder>() {
     private val product_titles: List<String>
@@ -38,6 +39,7 @@ class Adapter internal constructor(
     private val flipkart_prices: List<String>
     private val amazon_urls: List<String>
     private val flipkart_urls: List<String>
+    private val brand:String
     private val inflater: LayoutInflater
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = inflater.inflate(R.layout.custom_layout, parent, false)
@@ -60,21 +62,70 @@ class Adapter internal constructor(
         var pyo3 : PyObject = py3.getModule("least_price")
         var obj3 : PyObject = pyo3.callAttr("main",title)
         var least:Float = obj3.toFloat()
-        if(amazon_price!= "unavailable" && flipkart_price!="unavailable" && amazon_price!="Not Found" && flipkart_price!="Not Found"){
-            if(amazon_price.toFloat() <= least || flipkart_price.toFloat() <= least){
-                holder.lowest_or_not.text="Lowest ever"
-            }
+        if(brand != "lowest ever"){
 
+            if(amazon_price!= "unavailable" && flipkart_price!="unavailable" && amazon_price!="Not Found" && flipkart_price!="Not Found"){
+
+                if(amazon_price.replace(",","").toFloat() <= least || flipkart_price.replace(",","").toFloat() <= least){
+                    holder.lowest_or_not.visibility=View.VISIBLE
+                }
+                else{
+                    holder.lowest_or_not.visibility=View.INVISIBLE
+                }
+
+            }
+            else{
+                if(amazon_price== "unavailable" || amazon_price=="Not Found"){
+                    if(flipkart_price!="unavailable" && flipkart_price!="Not Found" ){
+                        if (flipkart_price.replace(",","").toFloat() <= least){
+                            holder.lowest_or_not.visibility=View.VISIBLE
+                        }
+                        else{
+                            holder.lowest_or_not.visibility=View.INVISIBLE
+                        }
+                    }
+                    else{
+                        holder.lowest_or_not.visibility=View.INVISIBLE
+                    }
+                }
+                else{
+                    if(flipkart_price== "unavailable" || flipkart_price=="Not Found"){
+                        if(amazon_price!="unavailable" && amazon_price!="Not Found" ){
+                            if (amazon_price.replace(",","").toFloat() <= least){
+                                holder.lowest_or_not.visibility=View.VISIBLE
+                            }
+                            else{
+                                holder.lowest_or_not.visibility=View.INVISIBLE
+                            }
+                        }
+                        else{
+                            holder.lowest_or_not.visibility=View.INVISIBLE
+                        }
+                    }
+                }
+
+            }
         }
+        else{
+            holder.lowest_or_not.visibility=View.VISIBLE
+        }
+
 
 
         holder.productTitle.text = title
         holder.rating.text = rating
-        holder.reviewCount.text = review_count
+        holder.reviewCount.text = '('+review_count+')'
         holder.amazonPrice.text = amazon_price
         holder.flipkartPrice.text = flipkart_price
         holder.productTitle.setOnClickListener{
             val context = holder.productTitle.context
+            val intent = Intent(context, ProductActivity::class.java)
+            intent.putExtra(ProductActivity.title, title)
+            context.startActivity(intent)
+
+        }
+        holder.thumbnail.setOnClickListener{
+            val context = holder.thumbnail.context
             val intent = Intent(context, ProductActivity::class.java)
             intent.putExtra(ProductActivity.title, title)
             context.startActivity(intent)
@@ -143,6 +194,7 @@ class Adapter internal constructor(
         this.flipkart_prices = flipkart_prices
         this.amazon_urls = amazon_urls
         this.flipkart_urls = flipkart_urls
+        this.brand = Brand
         inflater = LayoutInflater.from(context)
     }
 }

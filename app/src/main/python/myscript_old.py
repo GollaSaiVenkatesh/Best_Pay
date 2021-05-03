@@ -25,7 +25,6 @@ def construct_graph(string_gen,datesamazon,flipkart,amazon):
         flip=flipkart[string_gen][4:]  
         flip=removecomma(flip)
     else:
-        flip=[]
         print("Item Not Found on Flipkart")
     if(a):
         print("-----------------------------------------------------------Amazon")
@@ -33,44 +32,13 @@ def construct_graph(string_gen,datesamazon,flipkart,amazon):
         ama=amazon[string_gen][4:]
         ama=removecomma(ama)
     else:
-        ama=[]
         print("Item Not Found on Amazon")
 
     x=datesamazon[5:]
-    widthfactor = 3
+
     fig = plt.figure()
-    fig.set_figwidth(7)
-    fig.set_figheight(5)
-
-    finx1=[]
-    finy1=[]
-
-    size=len(x)
-    q=flip+ama
-    flipo=[]
-    for i in flip:
-        if(i):
-            flipo.append(i)
-    amao=[]
-    for i in ama:
-        if(i):
-            amao.append(i)
-    mini=float('inf')
-    maxi=-1*float('inf')
-    for i in range(len(q)):
-        if(q[i]):
-            mini=min(mini,q[i])
-            maxi=max(maxi,q[i])
-
-
-    for i in range(0,size,int(size/(widthfactor))):
-        finx1.append(x[i])
-        if(len(finx1)<=size):
-            finx1=finx1+['']*(int(size/(widthfactor))-1)
-
-    print(finx1)
-    finx1.pop()
-    finx1.append(x[len(x)-1])
+    fig.set_figwidth(2*len(x))
+    fig.set_figheight(len(x))
     if(f):
         x1 = x
         y1 = flip    
@@ -81,8 +49,7 @@ def construct_graph(string_gen,datesamazon,flipkart,amazon):
         y2 = ama     
         plt.plot(x2, y2, label = "amazon")
     if(a or f):    
-        plt.legend()
-        plt.gca().axes.xaxis.set_ticklabels(finx1)
+        plt.legend() 
         plt.xlabel('Dates') 
         plt.ylabel('Prices') 
         plt.title(string_gen)
