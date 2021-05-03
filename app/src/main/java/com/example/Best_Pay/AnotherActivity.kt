@@ -56,8 +56,8 @@ class AnotherActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBar)
         wait = findViewById(R.id.wait)
-        val URL1 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/flipkart1.xls?raw=true"
-        val URL2 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/amazon1.xls?raw=true"
+        val URL1 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/flipkart.xls?raw=true"
+        val URL2 = "https://github.com/GollaSaiVenkatesh/Best_Pay/blob/master/data/amazon.xls?raw=true"
         productTitle = ArrayList()
         productName = ArrayList()
         ratings = ArrayList()
